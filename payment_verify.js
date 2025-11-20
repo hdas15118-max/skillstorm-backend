@@ -1,13 +1,15 @@
-import express from "express";
-import crypto from "crypto";
+const express = require("express");
+const crypto = require("crypto");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const router = express.Router();
 
-// Payment verification route
 router.post("/verify", (req, res) => {
   const { order_id, payment_id, signature } = req.body;
 
-  const secret = "RAZORPAY_SECRET_KEY"; // <-- apni secret key daalna
+  const secret = process.env.RAZORPAY_SECRET;
 
   const hash = crypto
     .createHmac("sha256", secret)
@@ -21,4 +23,4 @@ router.post("/verify", (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
