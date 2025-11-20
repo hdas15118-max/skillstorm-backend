@@ -1,9 +1,9 @@
-import express from "express";
-import Tournament from "../models/tournament_model.js";
+const express = require("express");
+const Tournament = require("../models/tournament_model");
 
 const router = express.Router();
 
-// ➤ Create Tournament
+// Create Tournament
 router.post("/add", async (req, res) => {
   try {
     const t = new Tournament(req.body);
@@ -14,14 +14,10 @@ router.post("/add", async (req, res) => {
   }
 });
 
-// ➤ Get All Tournaments
+// Get All Tournaments
 router.get("/list", async (req, res) => {
-  try {
-    const tournaments = await Tournament.find();
-    res.json(tournaments);
-  } catch (e) {
-    res.json([]);
-  }
+  const tournaments = await Tournament.find();
+  res.json(tournaments);
 });
 
-export default router;
+module.exports = router;
