@@ -1,10 +1,10 @@
-import express from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-import dotenv from "dotenv";
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const dotenv = require("dotenv");
 
-import adminRoutes from "./routes/admin.js";
-import paymentRoutes from "./routes/payment_verify.js";
+const adminRoutes = require("./routes/admin");
+const paymentRoutes = require("./routes/payment_verify");
 
 dotenv.config();
 
@@ -30,6 +30,7 @@ app.use("/admin", adminRoutes);
 app.use("/payment", paymentRoutes);
 
 // Start server
-app.listen(5000, () => {
-  console.log("SkillStorm server running at http://localhost:5000");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`SkillStorm server running at port ${PORT}`);
 });
